@@ -23,7 +23,7 @@ First, clone the repository to your local machine:
 
 ```bash
 git clone <repository-url>
-cd cocoa-yield-management
+cd CACAO AIDE
 ```
 
 ### 2. Set Up a Virtual Environment
