@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Details{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="form-container">
+        <h2>Update Details</h2>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.username.label(class="form-label") }}
+                {{ form.username(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control") }}
+            </div>
+            <div class="form-group password-container">
+                {{ form.password.label(class="form-label") }}
+                <div class="password-wrapper">
+                    {{ form.password(class="form-control password-field") }}
+                    <span class="toggle-password" onclick="togglePasswordVisibility('update-password')">
+                        &#128065;
+                    </span>
+                </div>
+            </div>
+            <div class="form-group password-container">
+                {{ form.confirm_password.label(class="form-label") }}
+                <div class="password-wrapper">
+                    {{ form.confirm_password(class="form-control password-field") }}
+                    <span class="toggle-password" onclick="togglePasswordVisibility('update-confirm-password')">
+                        &#128065;
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    .password-container {
+        position: relative;
+    }
+
+    .password-wrapper {
+        position: relative;
+        width: 100%;
+    }
+
+    .password-field {
+        width: 100%;
+        padding-right: 40px; /* Make room for the icon */
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        font-size: 18px;
+    }
+</style>
+
+<script>
+    function togglePasswordVisibility() {
+        var passwordFields = document.querySelectorAll('.password-field');
+        var toggleIcons = document.querySelectorAll('.toggle-password');
+        passwordFields.forEach((passwordField, index) => {
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcons[index].innerHTML = "&#128065;&#xFE0E;"; // Cancelled eye
+            } else {
+                passwordField.type = "password";
+                toggleIcons[index].innerHTML = "&#128065;"; // Eye
+            }
+        });
+    }
+</script>
+{% endblock %}

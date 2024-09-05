@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}Predict Yield{% endblock %}
+
+{% block content %}
+<div class="container" style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: black;
+    padding: 20px;
+">
+    <div class="form-box" style="
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    ">
+        <h1 style="margin-bottom: 20px; text-align: center;"><strong>Predict Cocoa Yield</strong></h1>
+        <form method="POST" action="/predict_yield" style="
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        ">
+            <label for="location" style="grid-column: span 4; text-align: left;">1. In which <strong>area</strong> is your cocoa plot? (Wet,Mid or Dry?)</label>
+            <select name="location" style="padding: 10px; border-radius: 4px; grid-column: span 4;">
+                <option value="Dry">Dry area</option>
+                <option value="Mid">Mid area</option>
+                <option value="Wet">Wet area</option>
+            </select>
+
+            <label style="grid-column: span 4; text-align: left;">2. Do you use <strong>insecticides?</strong> (Yes or No)</label>
+            <select name="insecticide.applied.ltrs.ha" style="padding: 10px; border-radius: 4px; grid-column: span 4;">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label style="grid-column: span 4; text-align: left;">3. Do you use <strong>organic</strong> fertilizers? (Yes or No)</label>
+            <select name="org.fert.kg.ha" style="padding: 10px; border-radius: 4px; grid-column: span 4;">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label style="grid-column: span 4; text-align: left;">4. Do you use <strong>inorganic</strong> fertilizers? (Yes or No)</label>
+            <select name="inorgfert.kg.ha" style="padding: 10px; border-radius: 4px; grid-column: span 4;">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            
+            <label for="Cocoa plot age" style="grid-column: span 4; text-align: left;">5. How many <strong>years</strong> have you used the <strong>plot</strong>?</label>
+            <input type="number" name="Cocoa plot age" placeholder="Cocoa plot age" style="padding: 10px; border-radius: 4px; grid-column: span 4;">
+
+            <label for="Cocoa plant density" style="grid-column: span 4; text-align: left;">6. <strong>How many</strong> cocoa trees do you have?</label>
+            <input type="number" name="Cocoa plant density" placeholder="Number of cocoa trees" style="padding: 10px; border-radius: 4px; grid-column: span 4;">
+
+            <div style="
+            grid-column: span 4;
+            display: flex;
+            justify-content: center;
+        ">
+            <button type="submit" style="
+                width: 50%;
+                margin-top: 20px;
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            ">Predict Yield</button>
+            </div>
+        </form>
+        {% if prediction %}
+            <div style="
+                margin-top: 20px;
+                padding: 20px;
+                background-color: #e0ffe0;
+                border: 1px solid #4CAF50;
+                border-radius: 4px;
+                text-align: center;
+            ">
+                <h2>You are going to have approximately {{ prediction }} kilograms of cocoa at the end of the year on every hectare of land.</h2>
+                <ul style="text-align: left;">
+                    {% for recommendation in recommendations %}
+                        <li>{{ recommendation }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

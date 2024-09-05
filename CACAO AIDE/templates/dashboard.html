@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <h2 align="center"><strong>Hello {{ current_user.username }}, Welcome to Cacao Aide!</strong></h2>
+<div id="my_tips">
+<h3><u><strong>Cacao Tip</strong></u></h3>
+<br/>
+<p><strong><h5>{{ tip }}</h5></strong></p>
+<br/>
+<a href="/dashboard"><h6>Get another tip</h6></a>
+</div>
+<br/>
+{% endblock %}

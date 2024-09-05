@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Chatbot{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: auto; background-color: #ffffff; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <h1 style="text-align: center; color: #4CAF50;">CacaoBot</h1>
+    <div id="chat-box" style="margin-top: 20px; max-height: 400px; overflow-y: auto; padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        <!-- Chat messages will be appended here -->
+    </div>
+    <form id="chat-form" style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+        <input type="text" id="user-input" name="question" placeholder="Ask your question here..." style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;">
+        <button type="submit" style="padding: 10px; border: none; border-radius: 5px; background-color: #4CAF50; color: white; cursor: pointer;">Ask</button>
+    </form>
+</div>
+
+<!-- Hidden response element for JavaScript to extract content -->
+<div id="response" style="display: none;">{{ response }}</div>
+
+<script>
+    const form = document.getElementById('chat-form');
+    const chatBox = document.getElementById('chat-box');
+    const userInput = document.getElementById('user-input');
+    const responseElement = document.getElementById('response');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const question = userInput.value;
+        if (question.trim() === "") return;
+
+        appendMessage("You", question, "#000000");
+        userInput.value = "";
+
+        fetch('/chatbot', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams({'question': question})
+        })
+        .then(response => {
+            console.log("Response status:", response.status); // Log response status
+            return response.text();
+        })
+        .then(data => {
+            console.log("Raw response data:", data); // Log raw response data
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data, 'text/html');
+            const answer = doc.querySelector('#response').textContent;
+            appendMessage("Bot", answer, "#4CAF50");
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            appendMessage("Bot", "Sorry, I couldn't process your request.", "#FF0000");
+        });
+    });
+
+    function appendMessage(sender, message, color) {
+        const messageContainer = document.createElement('div');
+        messageContainer.style.marginBottom = '10px';
+        const senderSpan = document.createElement('strong');
+        senderSpan.textContent = sender + ': ';
+        senderSpan.style.color = color; // Set the text color for the sender name
+        const messageSpan = document.createElement('span');
+        messageSpan.textContent = message;
+        messageSpan.style.color = color; // Set the text color for the message
+        messageContainer.appendChild(senderSpan);
+        messageContainer.appendChild(messageSpan);
+        chatBox.appendChild(messageContainer);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+</script>
+{% endblock %}

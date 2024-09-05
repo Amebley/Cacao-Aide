@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cocoa Farm Services</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='file.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <section class="homepage">
+        <div class="Overlay">
+            <section class="services">
+                <div class="intro">
+                    <!--Info about cocoa-->
+                    <h1>Grow Your Cocoa Farm</h1>
+                    <p>Get the best advice on how to grow a successful cocoa farm. Learn about the best farming techniques to grow healthy and productive cocoa plants.</p>
+                </div>
+        
+                <div class="service-grid">
+                    <a href="{{ url_for('content1') }}">
+                    <div class="service-card highlight">
+                        <i class="fas fa-seedling"></i>
+                        <h3>Growing Cocoa</h3>
+                        <p>Learn about the best farming techniques to grow healthy and productive cocoa plants.</p>
+                    </div>
+                    </a>
+                    <a href="{{ url_for('content2') }}">
+                        <div class="service-card">
+                            <i class="fas fa-seedling"></i>
+                             <h3>Choosing Seeds and Growing Seeds</h3>
+                             <p>Learn about sustainable farming practices to ensure the longevity of your cocoa farm.</p>
+                         </div>
+                    
+                    </a>
+                    <a href="{{ url_for('content3') }}">
+                        <div class="service-card">
+                            <i class="fas fa-map "></i>
+                            <h3>Choosing and Comparing Plantation Site</h3>
+                            <p>Get tips on when and how to harvest your cocoa beans for optimal quality.</p>
+                        </div>
+                   
+                    </a>
+                    <a href="{{ url_for('content4') }}">
+                        <div class="service-card">
+                            <i class="fas fa-leaf"></i>
+                            <h3>Taking Care of the plantation</h3>
+                            <p>Find out how to nurture and grow strong cocoa seedlings for a thriving plantation.</p>
+                        </div>
+                    
+                    </a>
+                    <a href="{{ url_for('content5') }}">
+                        <div class="service-card">
+                            <i class="fas fa-tractor"></i>
+                            <h3>Haversting the pods</h3>
+                            <p>Explore the steps involved in processing cocoa beans from the farm to the final product.</p>
+                        </div>
+                   
+                    </a>
+                    <a href="{{ url_for('content6') }}">
+                        <div class="service-card">
+                            <i class="fas fa-tractor"></i>
+                            <h3>Processing Cocoa Beans</h3>
+                            <p>Understand the cocoa trading market and how to sell your cocoa beans profitably.</p>
+                        </div>
+                    
+                    </a>
+                </div>
+            </section>
+        </div>
+        
+    </section>
+    
+</body>
+</html>

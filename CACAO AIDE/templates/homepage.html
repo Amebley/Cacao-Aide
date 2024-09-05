@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cacao Aide</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Homepage.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+</head>
+<body> 
+    <section class="homepage">
+        <div class="container">
+            <nav class="navbar">
+                <h1 class="logo">Cacao Aide</h1>            
+            </nav>
+            <div class="center">
+                <div class="centerheader">
+                    <h1 class="centertitle">Unlock the full potential of your cocoa farm with Cacao Aide today!</h1>
+                    <p class="cen"><strong>Get accurate forecasts and information, make informed decisions, and boost your harvest with confidence. Simple. Smart. Reliable.</strong></p>
+                    <div class="Get">
+                        <a class="btn-cta" href="{{ url_for('login') }}">Get Started</a>
+                    </div>
+                </div>
+                <div class="homegif">
+                    <img src="{{ url_for('static', filename='Cocoa Plantation (2).gif') }}" alt="video of cocoa plantation">
+                </div>
+            </div>  
+        </div>
+    </section>
+</body>
+</html>

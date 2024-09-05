@@ -1,0 +1,75 @@
+{% extends 'base.html' %}  
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="form-container">
+            <h2><strong>Login</strong></h2>
+            <form method="POST" class="login-form">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.username.label(class="form-label") }}
+                    {{ form.username(class="form-control") }}
+                </div>
+                <div class="form-group password-container">
+                    {{ form.password.label(class="form-label") }}
+                    <div class="password-wrapper">
+                        {{ form.password(class="form-control password-field") }}
+                        <span class="toggle-password" onclick="togglePasswordVisibility()">
+                            &#128065;
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-primary") }}
+                </div>
+            </form>
+            <p>Don't have an account? <a href="{{ url_for('register') }}">Register now!</a></p>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}" style="color: rgb(17, 16, 16);">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+    <style>
+        .password-container {
+            position: relative;
+        }
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        .password-field {
+            width: 100%;
+            padding-right: 40px; /* Make room for the icon */
+        }
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .alert-danger {
+            color: black;
+        }
+    </style>
+    <script>
+        function togglePasswordVisibility() {
+            var passwordField = document.querySelector('.password-field');
+            var toggleIcon = document.querySelector('.toggle-password');
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.innerHTML = "&#128065;&#xFE0E;";
+            } else {
+                passwordField.type = "password";
+                toggleIcon.innerHTML = "&#128065;";
+            }
+        }
+    </script>
+{% endblock %}

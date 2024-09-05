@@ -1,0 +1,211 @@
+{% extends 'base.html' %}
+
+{% block title %}Farm Management{% endblock %}
+
+{% block content %}
+<h1 style="text-align: center; font-style: italic;"><strong>Record Management System</strong></h1>
+<br/>
+<form action="{{ url_for('farm_management') }}" method="POST" style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
+    <h3 style="text-align: center;">Record New Activity</h3>
+    <input type="hidden" name="form_type" value="diary">
+    <div style="margin-bottom: 10px;">
+        <h6>Date:</h6>
+        <input type="date" id="diaryDate" name="date" style="padding: 5px; width:100%">
+    </div>
+    <div style="margin-bottom: 10px;">
+        <h6>Activity:</h6>
+        <input type="text" id="diaryActivity" name="activity" style="padding: 5px; width:100%">
+    </div>
+    <div style="margin-bottom: 10px;">
+        <h6>Notes:</h6>
+        <textarea id="diaryNotes" name="notes" style="padding: 5px; width:100%"></textarea>
+    </div>
+    <div  style="display: flex;
+    justify-content: center;">
+        <button type="submit" style="padding: 10px 20px; background-color: blue; color: white; border: none; cursor: pointer;width: 30%; border-radius: 5px; width: 50%">Add Diary Entry</button>
+    </div>
+</form>
+
+<form action="{{ url_for('farm_management') }}" method="POST" style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
+    <h3 style="text-align: center;">Record New Inventory Item</h3>
+    <input type="hidden" name="form_type" value="inventory">
+    <div style="margin-bottom: 10px;">
+        <h6>Item Name:</h6>
+        <input type="text" id="inventoryItemName" name="item_name" style="padding: 5px; width:100%">
+    </div>
+    <div style="margin-bottom: 10px;">
+        <h6>Quantity in Stock:</h6>
+        <input type="text" id="inventoryQuantity" name="quantity_in_stock" style="padding: 5px; width:100%;">
+    </div>
+    <div style="margin-bottom: 10px;">
+        <h6>Last Updated:</h6>
+        <input type="date" id="inventoryLastUpdated" name="last_updated" style="padding: 5px; width:100%">
+    </div>
+    <div  style="display: flex;
+    justify-content: center;">
+    <button type="submit" style="padding: 10px 20px; background-color: blue; color: white; border: none; cursor: pointer;border-radius: 5px;width: 50%">Add Inventory Item</button>
+</div>
+</form>
+
+<form action="{{ url_for('farm_management') }}" method="POST" style="border: 1px solid #ccc; padding: 20px; margin-bottom: 20px;">
+    <h3 style="text-align: center;">Record New Transaction</h3>
+    <input type="hidden" name="form_type" value="transaction">
+    <div style="margin-bottom: 10px;">
+        <label for="transactionDate">Date:</label>
+        <input type="date" id="transactionDate" name="date" style="padding: 5px; width: 100%">
+    </div>
+    <div style="margin-bottom: 10px;">
+        <label for="transactionDescription">Description:</label>
+        <input type="text" id="transactionDescription" name="description" style="padding: 5px; width: 100%">
+    </div>
+    <div style="margin-bottom: 10px;">
+        <label for="transactionAmount">Amount(GHC):</label>
+        <input type="number" step="0.01" id="transactionAmount" name="amount" style="padding: 5px; width: 100%">
+    </div>
+    <div style="margin-bottom: 10px;">
+        <label for="transactionType">Transaction Type:</label>
+        <input type="text" id="transactionType" name="transaction_type" style="padding: 5px; width: 100%">
+    </div>
+    <div  style="display: flex;
+    justify-content: center;">
+    <button type="submit" style="padding: 10px 20px; background-color: blue; color: white; border: none; cursor: pointer;border-radius:5px; width: 50%">Add Transaction</button>
+</div>
+</form>
+<br/><br/><br/><br/><br/><br/>
+<h1 style="text-align: center;"><strong><u>RECORDS</u></strong></h1>
+<br/><br/><br/>
+<h3 style="text-align: center;"><strong>Recorded Activities</strong></h3>
+<div style="margin-bottom: 20px;">
+    {% for activity in diary_entries %}
+    <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+        <p><strong>Activity:</strong> {{ activity.activity }}</p>
+        <p><strong>Notes:</strong> {{ activity.notes }}</p>
+        <p><strong>Date:</strong> {{ activity.date }}</p>
+        <button onclick="editRecord('diary', '{{ activity.id }}', '{{ activity.date }}', '{{ activity.activity }}', '{{ activity.notes }}')" style="padding: 5px 10px; background-color: green; color: white; border: none; cursor: pointer;">Edit</button>
+        <form action="{{ url_for('delete') }}" method="POST" style="display: inline;">
+            <input type="hidden" name="id" value="{{ activity.id }}">
+            <input type="hidden" name="form_type" value="diary">
+            <button type="submit" style="padding: 5px 10px; background-color: red; color: white; border: none; cursor: pointer;">Delete</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+<br/>
+<h3 style="text-align: center;"><strong>Inventory Items</strong></h3>
+<div style="margin-bottom: 20px;">
+    {% for item in inventory_items %}
+    <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+        <p><strong>Item Name:</strong> {{ item.item_name }}</p>
+        <p><strong>Quantity in Stock:</strong> {{ item.quantity_in_stock }}</p>
+        <p><strong>Last Updated:</strong> {{ item.last_updated }}</p>
+        <button onclick="editRecord('inventory', '{{ item.id }}', '{{ item.item_name }}', '{{ item.quantity_in_stock }}', '{{ item.last_updated }}')" style="padding: 5px 10px; background-color: green; color: white; border: none; cursor: pointer;">Edit</button>
+        <form action="{{ url_for('delete') }}" method="POST" style="display: inline;">
+            <input type="hidden" name="id" value="{{ item.id }}">
+            <input type="hidden" name="form_type" value="inventory">
+            <button type="submit" style="padding: 5px 10px; background-color: red; color: white; border: none; cursor: pointer;">Delete</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+<br/>
+<h3 style="text-align: center;"><strong>Transactions</strong></h3>
+<div style="margin-bottom: 20px;">
+    {% for transaction in transactions %}
+    <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+        <p><strong>Date:</strong> {{ transaction.date }}</p>
+        <p><strong>Description:</strong> {{ transaction.description }}</p>
+        <p><strong>Amount(GHC):</strong> {{ transaction.amount }}</p>
+        <p><strong>Transaction Type:</strong> {{ transaction.transaction_type }}</p>
+        <button onclick="editRecord('transaction', '{{ transaction.id }}', '{{ transaction.date }}', '{{ transaction.description }}', '{{ transaction.amount }}', '{{ transaction.transaction_type }}')" style="padding: 5px 10px; background-color: green; color: white; border: none; cursor: pointer;">Edit</button>
+        <form action="{{ url_for('delete') }}" method="POST" style="display: inline;">
+            <input type="hidden" name="id" value="{{ transaction.id }}">
+            <input type="hidden" name="form_type" value="transaction">
+            <button type="submit" style="padding: 5px 10px; background-color: red; color: white; border: none; cursor: pointer;">Delete</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Popup Container -->
+<div id="popupContainer" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center;">
+    <div id="popupContent" style="background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);"></div>
+</div>
+
+
+<script>
+    function editRecord(formType, id, ...fields) {
+        const popupContainer = document.getElementById('popupContainer');
+        const popupContent = document.getElementById('popupContent');
+        popupContent.innerHTML = ''; // Clear previous content
+
+        let formHtml = `
+            <form id="editForm" action="/edit" method="POST">
+                <input type="hidden" name="form_type" value="${formType}">
+                <input type="hidden" name="id" value="${id}">
+        `;
+
+        if (formType === 'diary') {
+            formHtml += `
+                <div style="margin-bottom: 10px;">
+                    <label for="diaryDate">Date:</label>
+                    <input type="date" id="diaryDate" name="date" value="${fields[0]}" style="padding: 5px;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label for="diaryActivity">Activity:</label>
+                    <input type="text" id="diaryActivity" name="activity" value="${fields[1]}" style="padding: 5px;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label for="diaryNotes">Notes:</label>
+                    <textarea id="diaryNotes" name="notes" style="padding: 5px;">${fields[2]}</textarea>
+                </div>
+            `;
+        } else if (formType === 'inventory') {
+            formHtml += `
+                <div style="margin-bottom: 10px;">
+                    <label for="inventoryItemName">Item Name:</label>
+                    <input type="text" id="inventoryItemName" name="item_name" value="${fields[0]}" style="padding: 5px;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label for="inventoryQuantity">Quantity in Stock:</label>
+                    <input type="text" id="inventoryQuantity" name="quantity_in_stock" value="${fields[1]}" style="padding: 5px;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label for="inventoryLastUpdated">Last Updated:</label>
+                    <input type="date" id="inventoryLastUpdated" name="last_updated" value="${fields[2]}" style="padding: 5px;">
+                </div>
+            `;
+        } else if (formType === 'transaction') {
+            formHtml += `
+                <div style="margin-bottom: 10px;">
+                    <label for="transactionDate">Date:</label>
+                    <input type="date" id="transactionDate" name="date" value="${fields[0]}" style="padding: 5px;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label for="transactionDescription">Description:</label>
+                    <input type="text" id="transactionDescription" name="description" value="${fields[1]}" style="padding: 5px;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label for="transactionAmount">Amount:</label>
+                    <input type="number" step="0.01" id="transactionAmount" name="amount" value="${fields[2]}" style="padding: 5px;">
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label for="transactionType">Transaction Type:</label>
+                    <input type="text" id="transactionType" name="transaction_type" value="${fields[3]}" style="padding: 5px;">
+                </div>
+            `;
+        }
+
+        formHtml += `<button type="submit" style="padding: 10px 20px; background-color: blue; color: white; border: none; cursor: pointer;">Save Changes</button></form>`;
+
+        popupContent.innerHTML = formHtml;
+        popupContainer.style.display = 'flex';
+    }
+
+    // Close the popup when clicking outside of it
+    document.getElementById('popupContainer').addEventListener('click', function(event) {
+        if (event.target === this) {
+            this.style.display = 'none';
+        }
+    });
+</script>
+{% endblock %}
