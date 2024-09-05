@@ -1,0 +1,166 @@
+
+*{
+    margin: 0;
+    padding: o;
+    font-family: 'Playfair Display', serif;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    background-image: url('/static/COCOA IMG 2.jpg'); /* Path to the image */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-repeat: no-repeat; /* Avoid repeating the image */
+    background-attachment: fixed; /*makes the background image fixed*/
+    background-position: center; /* Center the image */
+    position: relative; /* Necessary for the overlay */
+    z-index: 0;
+
+}
+
+
+.Overlay {
+    position: relative;
+    z-index: 1; /* Ensures content is above the background image */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay for better text readability */
+    height: 100vh;
+    padding: 5rem 0;
+
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+
+}
+
+header {
+    background-color: #4CAF50;
+    padding: 1em 0;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+section.services {
+    position: relative;
+    padding: 2em;
+    text-align: center;
+    background-color: #fff;
+    width: 80%;
+    margin: auto;
+    border-radius: 10px;
+         background: linear-gradient(45deg,rgb(74, 165, 135),white);
+
+}
+
+ 
+
+section.services .intro h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 0.5em;
+    
+}
+section.services .intro {
+    padding: 0 10rem;
+    margin-bottom: 2em;
+}
+
+section.services .intro p {
+    color: #666;
+    margin-bottom: 1em;
+    font-size: 1.1em;
+}
+
+section.services .intro button {
+    background-color: white;
+    color: #333;
+    padding: 0.75em 1.5em;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    border-radius: 5px;
+    
+}
+
+section.services .service-grid {
+    padding-left: 10rem;
+    padding-right: 10rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5em;
+    margin-top: 2em;
+}
+
+section.services .service-card {
+    background-color: #f9f9f9;
+    padding: 1.5em;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    border-radius: 10px;
+}
+
+
+
+section.services .service-card img {
+    width: 60px;
+    margin-bottom: 1em;
+}
+
+section.services .service-card h3 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+}
+
+section.services .service-card p {
+    color: #777;
+    font-size: 1em;
+    margin-bottom: 1em;
+    padding:1em;
+}
+
+section.services .service-card:hover  {
+    background-color: #4CAF50;
+    color: white;
+}
+section.services .service-card:hover i{
+    color: white;
+}
+section.services .service-card:hover p {
+    color: white;
+}
+section.services .service-card p {
+    line-height: 1.5;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+
+}
+section.services .service-card h3 {
+    font-size: 1.2rem;
+}
+section.services .service-card i{
+    font-size: 3rem;
+    color: #4CAF50;
+}
+.service-grid a{
+    text-decoration: none;
+    color: #333;
+}

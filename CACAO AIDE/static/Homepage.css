@@ -1,0 +1,81 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none; 
+    font-family: 'Playfair Display', serif;
+ }
+
+ .navbar{
+     display: flex;
+     justify-content: space-between;
+     height: 5rem;
+     align-items: center;
+ 
+ }  
+ .nav-links{
+     display: flex;
+     gap: 32px;
+     font-weight: bold;
+     font-size: large;
+     margin: 40px;
+ }
+ .nav-links li a{
+     color:  #4CAF50;
+     
+ }
+ .logo{
+     color: black;
+     font-size: 30px;
+ }
+ .centertitle{
+     font-weight: bolder;
+     font-size: 40px; 
+     color:  #4CAF50;
+     text-align: left;
+ }
+ .cen{
+     width: 70%;
+     margin-top: 20px;
+     font-size: large;
+     line-height: 1.8;
+ }
+ .nav-btn{
+     display: flex;
+     gap: 1rem;
+     font-weight: bold;
+ }
+ .container{
+     width: 80%;
+     margin: 0 auto;
+ }
+ .center{
+     margin-top: 12%;
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+    
+ }
+ .homepage{
+     height: 100vh;
+     background: linear-gradient(45deg, white, rgb(74, 165, 135));
+ 
+ }
+ .homegif img{
+     width:100%;
+     border-radius: 10px;
+ }
+ .centerheader{
+     width: 100%;
+ }
+ .btn-cta{
+     background-color: #4CAF50;
+     border-radius: 10px;
+     padding: 20px;
+     color: white;
+ }
+ .Get{
+     margin-top: 50px;
+ }
+ 
+ 
