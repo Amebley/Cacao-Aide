@@ -3,10 +3,10 @@ A cocoa yield prediction and management system. Predicts cocoa yield, answers FA
 
 
 ## Features
-1. **Yield Prediction**: Predict cocoa yield based on farmer input. Provide cocoa farming recommendation based on yield predictions
+1. **Yield Prediction**: Predict cocoa yield based on farmer input. Provide cocoa farming recommendation based on yield predictions.
 2. **Record Management**: Keep track of farm diaries, inventory, and transactions.
-3. **User Authentication**: Secure user login and registration.
-4. **Chatbot**: Provides answers to frequently asked questions and helps users navigate the app.
+3. **User Authentication**: Secure user login, registration and update of details.
+4. **Chatbot**: Provides answers to frequently asked questions.
 5. **Flash Messages**: Inform users about updates to their records and other actions.
 6. **Tips and Info**: Provide cocoa farming tips based on yield predictions.
 
@@ -14,7 +14,10 @@ A cocoa yield prediction and management system. Predicts cocoa yield, answers FA
 To run the application locally, you need to have the following installed:
 
 - **Python 3.7+**
-- **Virtual Environment** (Optional but recommended)
+- **Flask**
+- **SQLite (for database)**
+- **Virtual Environment** (recommended)
+
 
 ## Setting Up the Application
 
@@ -22,7 +25,7 @@ To run the application locally, you need to have the following installed:
 First, clone the repository to your local machine:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Amebley/Cacao-Aide.git
 cd CACAO AIDE
 ```
 
@@ -50,38 +53,19 @@ Install the required Python packages listed in the `requirements.txt` file:
 pip install -r requirements.txt
 ```
 
-### 4. Set Up Environment Variables
-Create a `.env` file in the root directory of the project to store environment variables:
+### 4. Set Up the Database
+Initialize the SQLite database:
 
-```bash
-touch .env
-```
+flask shell
+>>> from models import db
+>>> db.create_all()
+>>> exit()
 
-Add the following variables to your `.env` file:
+This will create the users.db file and initialize the tables for storing user information, diaries, inventories, and transactions.
 
-```
-FLASK_APP=run.py
-FLASK_ENV=development
-SECRET_KEY=your_secret_key_here
-```
 
-Ensure to replace `your_secret_key_here` with a strong secret key.
-
-### 5. Set Up the Database
-Before running the app, you need to initialize the SQLite database:
-
-```bash
-# Open the Python shell to set up the database
-python
-```
-
-In the Python shell, run:
-
-```python
-from app import db
-db.create_all()
-exit()
-```
+5. Load the Cocoa Yield Model
+Make sure you have the pre-trained cocoa_yield_model.pkl file in the project directory.
 
 ### 6. Run the Application
 Now you are ready to run the application:
@@ -102,23 +86,20 @@ Visit `http://127.0.0.1:5000/` in your browser to use the application.
 Once the application is running, you can:
 
 1. Register a new account or log in with an existing account.
-2. Add records for farm diaries, inventory, and transactions.
-3. Use the yield prediction system by providing necessary inputs.
-4. Manage records by viewing, editing, or deleting your stored data.
+2. Update user input details.
+3. Access cocoa farming tips.
+4.  Use the yield prediction system by providing necessary inputs and receive recommendation based on inputs.
+5. Add records for farm diaries, inventory, and transactions.
+6. Manage records by viewing, editing, or deleting your stored data.
+7. Access informing cocoa farming articles and detailed tutorial on cocoa cultivation.
 
-## Testing
-To test that everything works, use the following commands:
 
-```bash
-# Running tests
-pytest
-```
+Troubleshooting
+Database Errors: Ensure that users.db exists and that you have correctly initialized the database tables using Flask's shell.
 
-## Troubleshooting
-If you encounter any issues, ensure that:
+Model Loading Issues: If the cocoa yield model fails to load, ensure that the file cocoa_yield_model.pkl is in the root directory of the project.
 
-1. **Dependencies**: All dependencies are properly installed using the `requirements.txt` file.
-2. **Database Setup**: The SQLite database has been properly initialized.
-3. **Environment Variables**: The `.env` file is correctly set up.
+Static Assets: Ensure the static files (CSS, images) are correctly placed in the static folder.
 
-For any further assistance, feel free to raise an issue in the repository.
+
+For any further assistance, feel free to raise an issue in the repository, or reach out to amebleyk@gmail.com.
